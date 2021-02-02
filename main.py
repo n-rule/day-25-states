@@ -11,18 +11,19 @@ screen.addshape(image)
 turtle.shape(image)
 
 data = pandas.read_csv('50_states.csv')
-correct_number = 0
+guessed_states = []
 
 while True:
 
-    answer_state = screen.textinput(title=f'{correct_number}/50 States Correct', prompt='What is another state name is?').title()
+    answer_state = screen.textinput(title=f'{len(guessed_states)}/50 States Correct',
+                                    prompt='What is another state name is?').title()
 
-    if answer_state in data.state.values:
-        correct_number += 1
-
+    if answer_state in data.state.values and answer_state not in guessed_states:
+        guessed_states.append(answer_state)
         state_row = data[data.state == answer_state]
-        tuple_coordinates = (state_row.x.values[0], state_row.y.values[0])
-
+        # tuple_coordinates = (state_row.x.values[0], state_row.y.values[0])
+        # Both variants works fine
+        tuple_coordinates = (int(state_row.x), int(state_row.y))
         new_state = State(answer_state, tuple_coordinates)
 
 
