@@ -31,9 +31,12 @@ while len(guessed_states) < 50:
         new_state = State(answer_state, tuple_coordinates)
 
 
-for state in data.state.values:
-    if state not in guessed_states:
-        states_to_learn.append(state)
+states_to_learn = [state for state in data.state.values if state not in guessed_states]
+
+#  BOTH WORKS
+# for state in data.state.values:
+#     if state not in guessed_states:
+#         states_to_learn.append(state)
 
 
 states_to_learn = pandas.DataFrame(states_to_learn)
